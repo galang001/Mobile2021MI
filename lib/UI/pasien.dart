@@ -15,7 +15,7 @@ class _pasienpageState extends State<pasienpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("User")),
+      appBar: AppBar(title: Text("Phones")),
       body: FutureBuilder<List<Pasien>>(
         future: ApiStatic.getPasien(),
         builder: (context, snapshot) {
@@ -56,7 +56,7 @@ class _pasienpageState extends State<pasienpage> {
                               children: [
                                 Text(listpasien[index].nama),
                                 Text(
-                                  listpasien[index].nik,
+                                  listpasien[index].kdphone,
                                   style: TextStyle(fontSize: 8),
                                 ),
                               ],
@@ -92,7 +92,7 @@ class _pasienpageState extends State<pasienpage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle_rounded),
-              title: Text("Pasien")),
+              title: Text("Phones")),
         ],
       ),
     );

@@ -2,30 +2,30 @@ import 'package:flutter/foundation.dart';
 
 class Pasien {
   Pasien({
-    required this.IDpasien,
+    required this.IDphone,
     required this.nama,
-    required this.nik,
-    required this.jkelamin,
-    required this.alamat,
+    required this.kdphone,
+    required this.merk,
+    required this.asalhp,
     required this.foto,
     required this.createdAt,
     required this.updatedAt,
   });
-  int IDpasien;
+  int IDphone;
   String nama;
-  String nik;
-  String jkelamin;
-  String alamat;
+  String kdphone;
+  String merk;
+  String asalhp;
   String foto;
   String createdAt;
   String updatedAt;
 
   factory Pasien.fromJson(Map<String, dynamic> json) => Pasien(
-        IDpasien: json["ID_Pasien"],
+        IDphone: json["ID_Phone"],
         nama: json["nama"].toString(),
-        nik: json["nik"].toString(),
-        jkelamin: json["jkelamin"].toString(),
-        alamat: json["alamat"].toString(),
+        kdphone: json["kdphone"].toString(),
+        merk: json["merk"].toString(),
+        asalhp: json["asalhp"].toString(),
         foto: json["foto"].toString(),
         createdAt: json["created_at"].toString(),
         updatedAt: json["update_at"].toString(),

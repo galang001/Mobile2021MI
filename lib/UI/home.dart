@@ -15,7 +15,7 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Informasi Pasien"),
+        title: Text("Informasi Handphone"),
       ),
       body: Center(
         child: Text("Isi Home Page"),
@@ -40,7 +40,7 @@ class _homepageState extends State<homepage> {
           BottomNavigationBarItem(icon: Icon(Icons.home), title: Text("Home")),
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle_rounded),
-              title: Text("Pasien")),
+              title: Text("Phones")),
         ],
       ),
     );

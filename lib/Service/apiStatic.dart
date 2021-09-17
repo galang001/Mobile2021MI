@@ -5,12 +5,12 @@ class ApiStatic {
     List<Pasien> pasien = [];
     for (var i = 0; i < 10; i++) {
       pasien.add(Pasien(
-        IDpasien: i,
-        nama: "Nama Pasien" + i.toString(),
-        nik: "2021" + i.toString(),
-        jkelamin: "Laki-Laki",
-        alamat: "Buleleng",
-        foto: "assets/appimages/usericon.jpg",
+        IDphone: i,
+        nama: "Nama HP" + i.toString(),
+        kdphone: "2021" + i.toString(),
+        merk: "Xiamoi",
+        asalhp: "China",
+        foto: "assets/appimages/phone.png",
         createdAt: "",
         updatedAt: "",
       ));

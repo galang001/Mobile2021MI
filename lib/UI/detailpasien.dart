@@ -31,7 +31,7 @@ class _detailpasienState extends State<detailpasien> {
                 ),
               ),
               child: Text(
-                widget.pasien.nik,
+                widget.pasien.kdphone,
                 style: TextStyle(color: Colors.white),
               ),
             ),
@@ -40,7 +40,7 @@ class _detailpasienState extends State<detailpasien> {
               color: Colors.lightBlue,
               width: double.infinity,
               height: double.maxFinite,
-              child: new Text(widget.pasien.alamat),
+              child: new Text(widget.pasien.asalhp),
             ),
           ],
         ),
