@@ -21,7 +21,7 @@ class Pasien {
   String updatedAt;
 
   factory Pasien.fromJson(Map<String, dynamic> json) => Pasien(
-        IDphone: json["ID_Phone"],
+        IDphone: json["IDphone"],
         nama: json["nama"].toString(),
         kdphone: json["kdphone"].toString(),
         merk: json["merk"].toString(),

@@ -56,7 +56,7 @@ class _pasienpageState extends State<pasienpage> {
                               children: [
                                 Text(listpasien[index].nama),
                                 Text(
-                                  listpasien[index].kdphone,
+                                  listpasien[index].merk,
                                   style: TextStyle(fontSize: 8),
                                 ),
                               ],

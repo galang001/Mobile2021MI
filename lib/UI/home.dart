@@ -1,7 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_coba1/UI/pasien.dart';
+import 'package:flutter_coba1/UI/isikonten.dart';
+import 'package:flutter_coba1/Model/pasien.dart';
+import 'package:flutter_coba1/Service/apiStatic.dart';
 
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
@@ -14,12 +15,10 @@ class _homepageState extends State<homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Informasi Handphone"),
-      ),
-      body: Center(
-        child: Text("Isi Home Page"),
-      ),
+      appBar: buildAppBar(),
+      body: bodykonten(),
+      // child: Text("Isi Home Page"),
+
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: 0,
@@ -43,6 +42,24 @@ class _homepageState extends State<homepage> {
               title: Text("Phones")),
         ],
       ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      elevation: 5,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_rounded),
+        onPressed: () {},
+      ),
+      title: Text("Produk Handphone"),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.search_rounded),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }
