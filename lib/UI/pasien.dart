@@ -52,14 +52,17 @@ class _pasienpageState extends State<pasienpage> {
                               listpasien[index].foto,
                               width: 20,
                             ),
-                            Column(
-                              children: [
-                                Text(listpasien[index].nama),
-                                Text(
-                                  listpasien[index].merk,
-                                  style: TextStyle(fontSize: 8),
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 4, right: 4),
+                              child: Column(
+                                children: [
+                                  Text(listpasien[index].nama),
+                                  Text(
+                                    listpasien[index].merk,
+                                    style: TextStyle(fontSize: 8),
+                                  ),
+                                ],
+                              ),
                             )
                           ],
                         ),

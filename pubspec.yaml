@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/appimages/cegahcovid.PNG
     - assets/appimages/phone.PNG
+    - assets/appimages/phone2.PNG
     - assets/appimages/usericon.jpg
 
 
