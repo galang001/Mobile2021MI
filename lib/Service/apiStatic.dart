@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_coba1/Model/pasien.dart';
 
 class ApiStatic {
-  static final host = 'http://192.168.1.5/2021web02/public';
+  static final host = 'http://192.168.1.5/API2021/public/api/phone';
   static getHost() {
     return host;
   }
