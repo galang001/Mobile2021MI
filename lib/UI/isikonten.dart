@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_coba1/Model/pasien.dart';
+import 'package:flutter_coba1/Model/ponsel.dart';
 import 'package:flutter_coba1/Service/apiStatic.dart';
 
 import 'kategori.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_coba1/UI/pasien.dart';
+import 'package:flutter_coba1/UI/ponsellist.dart';
 import 'package:flutter_coba1/UI/form.dart';
 import 'package:flutter_coba1/UI/isikonten.dart';
-import 'package:flutter_coba1/Model/pasien.dart';
+import 'package:flutter_coba1/Model/ponsel.dart';
 import 'package:flutter_coba1/Service/apiStatic.dart';
 
 class homepage extends StatefulWidget {
@@ -17,7 +17,6 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: bodykonten(),
       // child: Text("Isi Home Page"),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -31,12 +30,12 @@ class _homepageState extends State<homepage> {
               break;
             case 1:
               Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                  builder: (BuildContext context) => pasienpage()));
+                  builder: (BuildContext context) => ponselpage()));
               break;
-            case 2:
-              Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                  builder: (BuildContext context) => formpage()));
-              break;
+            // case 2:
+            //   Navigator.of(context).pushReplacement(new MaterialPageRoute(
+            //       builder: (BuildContext context) => formpage()));
+            //   break;
             default:
           }
         },
@@ -45,7 +44,7 @@ class _homepageState extends State<homepage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle_rounded),
               title: Text("Phones")),
-          BottomNavigationBarItem(icon: Icon(Icons.book), title: Text("Form")),
+          // BottomNavigationBarItem(icon: Icon(Icons.book), title: Text("Form")),
         ],
       ),
     );

@@ -1,27 +1,37 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_coba1/Model/ponsel.dart';
-import 'package:flutter_coba1/Service/apiStatic.dart';
+import 'package:flutter_coba1/UI/form.dart';
+import 'package:flutter_coba1/UI/home.dart';
 import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 
-void main() => runApp(formbody());
+void main() {
+  runApp(MyApp());
+}
 
-class formbody extends StatelessWidget {
-  const formbody({Key? key}) : super(key: key);
-
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'Form Validation';
-
     return MaterialApp(
-        title: appTitle,
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text(appTitle),
-          ),
-          body: formpage(),
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'Coba Coba',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.lightBlue,
+      ),
+      home: Scaffold(
+        appBar: AppBar(),
+        body: formpage(),
+      ),
+    );
   }
 }
 
@@ -39,6 +49,7 @@ class _formpageState extends State<formpage> {
   TextEditingController namaController = TextEditingController();
   TextEditingController tahunController = TextEditingController();
   TextEditingController asalhpController = TextEditingController();
+  final format = DateFormat('yyyy-MM-dd');
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -66,28 +77,37 @@ class _formpageState extends State<formpage> {
             child: TextFormField(
                 controller: namaController,
                 decoration: InputDecoration(
-                  labelText: 'Kode Ponsel',
+                  labelText: 'Nama Ponsel',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(3.0)),
                 )),
           ),
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: tahunController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Tahun Ponsel',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(3.0)),
+            padding: const EdgeInsets.all(10.0),
+            child: Column(children: <Widget>[
+              DateTimeField(
+                controller: tahunController,
+                format: format,
+                onShowPicker: (context, currentValue) {
+                  return showDatePicker(
+                      context: context,
+                      firstDate: DateTime(2021),
+                      initialDate: currentValue ?? DateTime.now(),
+                      lastDate: DateTime(2045));
+                },
+                decoration: InputDecoration(
+                  labelText: 'Tahun Ponsel',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(3.0)),
+                ),
+                validator: (dateTime) {
+                  if (dateTime == null) {
+                    return "Mohon Diisi Tanggal";
+                  }
+                  return null;
+                },
               ),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Diisi Menggunakan Angka';
-                }
-                return null;
-              },
-            ),
+            ]),
           ),
           Padding(
             padding: EdgeInsets.all(8.0),

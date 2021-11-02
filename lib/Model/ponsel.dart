@@ -4,8 +4,9 @@ class Ponsel {
   final int id_phone;
   final String nama;
   final String kd_phone;
-  final String merk;
+  final int merk;
   final String asalhp;
+  final String tahun;
   final String foto;
   final String createdAt;
   final String updatedAt;
@@ -15,6 +16,7 @@ class Ponsel {
     required this.nama,
     required this.kd_phone,
     required this.merk,
+    required this.tahun,
     required this.asalhp,
     required this.foto,
     required this.createdAt,
@@ -25,7 +27,8 @@ class Ponsel {
         id_phone: json["id_phone"],
         nama: json["nama"].toString(),
         kd_phone: json["kd_phone"].toString(),
-        merk: json["merk"].toString(),
+        merk: json["merk"],
+        tahun: json["tahun"],
         asalhp: json["asalhp"].toString(),
         foto: json["foto"].toString(),
         createdAt: json["created_at"].toString(),
@@ -35,6 +38,7 @@ class Ponsel {
         'nama': nama,
         'kd_phone': kd_phone,
         'merk': merk,
+        'tahun': tahun,
         'asalhp': asalhp,
         'foto': foto,
       };
