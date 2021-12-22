@@ -1,13 +1,20 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_coba1/Model/ponsel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_coba1/Model/brand.dart';
 import 'package:flutter_coba1/Model/errMSG.dart';
 
 class ApiStatic {
-  late int id_phone = 0;
-  static final _token = "10|uBozEtMKxFWFwPGOSroTSnUocnRAcGzEWT3naxzr";
-  static final host = 'http://192.168.1.9/API2021/public/api/';
+  static var _token = "17|9y9qPZTbhabRlvcTDyS0K734EVVwkgRM1WNNckp8";
+  static final host = 'http://192.168.1.4/API2021/public/api';
+  // Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+  // static Future<void> getPref() async {
+  //   Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+  //   final SharedPreferences prefs = await preferences;
+  //   _token = prefs.getString('token') ?? "";
+  // }
+
   static getHost() {
     return host;
   }
@@ -16,7 +23,7 @@ class ApiStatic {
   //   List<Ponsel> Ponsel = [];
   //   for (var i = 0; i < 10; i++) {
   //     Ponsel.add(Ponsel(
-  //       IDphone: i,
+  //       IDphone: i
   //       nama: "Nama HP" + i.toString(),
   //       kdphone: "2021" + i.toString(),
   //       merk: "Xiamoi",
@@ -34,7 +41,7 @@ class ApiStatic {
     //     '{"data":[{"IDphone":3,"nama":"X3 GT","kdphone":"2021","merk":"Xiaomi","asalhp":null,"foto":null,"created_at":"2021-09-25T13:53:19.000000Z","updated_at":"2021-09-25T13:53:19.000000Z"}]}';
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.1.9/API2021/public/api/phone'),
+          Uri.parse('http://192.168.1.4/API2021/public/api/phone'),
           headers: {
             'Authorization': 'Bearer' + _token,
           });
@@ -54,7 +61,7 @@ class ApiStatic {
       int pageKey, String _s, String _selectedChoice) async {
     try {
       final response = await http.get(
-          Uri.parse("http://192.168.1.9/API2021/public/api/phone?page=" +
+          Uri.parse("http://192.168.1.4/API2021/public/api/phone?page=" +
               pageKey.toString() +
               "&s=" +
               _s +
@@ -80,7 +87,7 @@ class ApiStatic {
     //     '{"data":[{"IDphone":3,"nama":"X3 GT","kdphone":"2021","merk":"Xiaomi","asalhp":null,"foto":null,"created_at":"2021-09-25T13:53:19.000000Z","updated_at":"2021-09-25T13:53:19.000000Z"}]}';
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.1.9/API2021/public/api/brand'),
+          Uri.parse('http://192.168.1.4/API2021/public/api/brand'),
           headers: {
             'Authorization': 'Bearer' + _token,
           });
@@ -98,10 +105,10 @@ class ApiStatic {
 
   static Future<ErrorMSG> savePonsel(id, ponsel, filepath) async {
     try {
-      var url = Uri.parse('http://192.168.1.9/API2021/public/api/phone');
+      var url = Uri.parse('http://192.168.1.4/API2021/public/api/phone');
       if (id != 0) {
         url = Uri.parse(
-            'http://192.168.1.9/API2021/public/api/phone' + id.toString());
+            'http://192.168.1.4/API2021/public/api/phone' + id.toString());
       }
 
       var request = http.MultipartRequest('POST', url);
@@ -136,7 +143,7 @@ class ApiStatic {
   static Future<ErrorMSG> deletePhone(id_phone) async {
     try {
       final response = await http.delete(
-          Uri.parse('http://192.168.1.9/API2021/public/api/phone' +
+          Uri.parse('http://192.168.1.4/API2021/public/api/phone' +
               id_phone.toString()),
           headers: {
             'Authorization': 'Bearer' + _token,
@@ -146,6 +153,30 @@ class ApiStatic {
       } else {
         return ErrorMSG(
             success: false, message: 'Periksa Kembali Inputan Anda');
+      }
+    } catch (e) {
+      ErrorMSG responseRequest =
+          ErrorMSG(success: false, message: 'error caught: $e');
+      return responseRequest;
+    }
+  }
+
+  static Future<ErrorMSG> sigIn(_post) async {
+    try {
+      final response = await http.post(
+          Uri.parse('http://192.168.1.4/API2021/public/api/login'),
+          body: _post);
+      if (response.statusCode == 200) {
+        var res = jsonDecode(response.body);
+        print(res);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', res['token']);
+        prefs.setString('name', res['user']['name']);
+        prefs.setString('email', res['user']['email']);
+        prefs.setInt('level', 1);
+        return ErrorMSG.fromJson(res);
+      } else {
+        return ErrorMSG.fromJson(jsonDecode(response.body));
       }
     } catch (e) {
       ErrorMSG responseRequest =

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_coba1/UI/ponsellist.dart';
+import 'package:flutter_coba1/UI/loginPage.dart';
 import 'package:flutter_coba1/UI/form.dart';
 import 'package:flutter_coba1/UI/isikonten.dart';
 import 'package:flutter_coba1/Model/ponsel.dart';
@@ -17,7 +18,6 @@ class _homepageState extends State<homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: bodykonten(),
       // child: Text("Isi Home Page"),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -33,10 +33,10 @@ class _homepageState extends State<homepage> {
               Navigator.of(context).pushReplacement(new MaterialPageRoute(
                   builder: (BuildContext context) => ponselpage()));
               break;
-            case 2:
-              Navigator.of(context).pushReplacement(new MaterialPageRoute(
-                  builder: (BuildContext context) => formpage()));
-              break;
+            // case 2:
+            //   Navigator.of(context).pushReplacement(new MaterialPageRoute(
+            //       builder: (BuildContext context) => formpage()));
+            //   break;
             default:
           }
         },
@@ -45,7 +45,7 @@ class _homepageState extends State<homepage> {
           BottomNavigationBarItem(
               icon: Icon(Icons.supervised_user_circle_rounded),
               title: Text("Phones")),
-          BottomNavigationBarItem(icon: Icon(Icons.book), title: Text("Form")),
+          // BottomNavigationBarItem(icon: Icon(Icons.book), title: Text("Form")),
         ],
       ),
     );

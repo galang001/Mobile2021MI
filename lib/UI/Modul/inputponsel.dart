@@ -74,7 +74,7 @@ class _InputPonselState extends State<InputPonsel> {
       asalhp = TextEditingController(text: widget.ponsel.asalhp);
       id_brand = widget.ponsel.merk;
       _isupdate = true;
-      _imageURL = ApiStatic.host + '/' + widget.ponsel.foto;
+      _imageURL = "http://192.168.1.4/API2021/public/" + widget.ponsel.foto;
     }
     super.initState();
   }
