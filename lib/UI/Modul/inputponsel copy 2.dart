@@ -16,18 +16,18 @@ class InputPonsel extends StatefulWidget {
 
 class _InputPonselState extends State<InputPonsel> {
   final _formkey = GlobalKey<FormState>();
-  final ImagePicker _picker = ImagePicker();
-  late TextEditingController nama, kd_phone, tahun, asalhp, merk, foto;
+  late TextEditingController nama, kd_phone, tahun, asalhp, merk;
   late List<Brand> _brand = [];
-  late int id_brand = 0;
   late int id_phone = 0;
+  late int id_brand = 0;
+  bool _isupdate = false;
+  bool _validate = false;
+  bool _success = false;
+  late ErrorMSG response;
+  late String _status = 'N';
   late String _imagePath = "";
   late String _imageURL = "";
-  late ErrorMSG response;
-  bool _isupdate = false;
-  bool _success = false;
-  bool _validate = false;
-
+  final ImagePicker _picker = ImagePicker();
   void getBrand() async {
     final response = await ApiStatic.getBrandHP();
     setState(() {
@@ -54,27 +54,31 @@ class _InputPonselState extends State<InputPonsel> {
       if (_success) {
         Navigator.of(context).pushReplacement(new MaterialPageRoute(
             builder: (BuildContext context) => ponselpage()));
-      } else {
-        _validate = true;
       }
+    } else {
+      _validate = true;
     }
   }
 
   @override
   void initState() {
+    // TODO: implement initState
     nama = TextEditingController();
     kd_phone = TextEditingController();
     tahun = TextEditingController();
     asalhp = TextEditingController();
     getBrand();
     if (widget.ponsel.id_phone != 0) {
+      //ApiStatic.detailPetani(widget.id).then((Petani result){
+      id_phone = widget.ponsel.id_phone;
       nama = TextEditingController(text: widget.ponsel.nama);
-      kd_phone = TextEditingController(text: widget.ponsel.kd_phone);
       tahun = TextEditingController(text: widget.ponsel.tahun);
       asalhp = TextEditingController(text: widget.ponsel.asalhp);
-      id_brand = widget.ponsel.merk;
+      kd_phone = TextEditingController(text: widget.ponsel.kd_phone);
+      id_brand = widget.ponsel.id_phone;
       _isupdate = true;
-      _imageURL = 'http://192.168.1.4/API2021/public/' + widget.ponsel.foto;
+      _imageURL = "http://192.168.1.4/API2021/public/" + widget.ponsel.foto;
+      //});
     }
     super.initState();
   }
@@ -97,11 +101,11 @@ class _InputPonselState extends State<InputPonsel> {
                   padding: const EdgeInsets.all(5),
                   child: TextFormField(
                     controller: nama,
-                    validator: (u) => u == null ? "Wajib Diisi" : null,
+                    validator: (u) => u == "" ? "Wajib Diisi " : null,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.perm_identity),
-                      hintText: 'Nama HP',
-                      labelText: 'Nama HP',
+                      hintText: 'Nama Petani',
+                      labelText: 'Nama Petani',
                     ),
                   ),
                 ),
@@ -109,35 +113,12 @@ class _InputPonselState extends State<InputPonsel> {
                   padding: const EdgeInsets.all(5),
                   child: TextFormField(
                     controller: kd_phone,
-                    validator: (u) => u == null ? "Wajib Diisi" : null,
+                    validator: (u) => u == "" ? "Wajib Diisi " : null,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
-                      icon: Icon(Icons.perm_identity),
-                      hintText: 'Kode HP',
-                      labelText: 'Kode HP',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: TextFormField(
-                    controller: tahun,
-                    validator: (u) => u == null ? "Wajib Diisi" : null,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.perm_identity),
-                      hintText: 'Tahun HP',
-                      labelText: 'Tahun HP',
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: TextFormField(
-                    controller: asalhp,
-                    validator: (u) => u == null ? "Wajib Diisi" : null,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.perm_identity),
-                      hintText: 'Asal HP',
-                      labelText: 'Asal HP',
+                      icon: Icon(Icons.assignment_ind),
+                      hintText: 'NIK Petani',
+                      labelText: 'NIK Petani',
                     ),
                   ),
                 ),
@@ -145,7 +126,7 @@ class _InputPonselState extends State<InputPonsel> {
                   padding: EdgeInsets.all(5),
                   child: DropdownButtonFormField(
                     value: id_brand == 0 ? null : id_brand,
-                    hint: Text("Pilih Brand"),
+                    hint: Text("Pilih Kelompok"),
                     decoration: const InputDecoration(
                       icon: Icon(Icons.category_rounded),
                     ),
@@ -160,11 +141,37 @@ class _InputPonselState extends State<InputPonsel> {
                         id_brand = value as int;
                       });
                     },
-                    validator: (u) => u == null ? "Wajib Diisi" : null,
+                    validator: (u) => u == null ? "Wajib Diisi " : null,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
+                  child: TextFormField(
+                    controller: tahun,
+                    keyboardType: TextInputType.phone,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.phone),
+                      hintText: 'Nomor HP',
+                      labelText: 'Nomor HP Petani',
+                    ),
+                    validator: (u) => u == "" ? "Wajib Diisi " : null,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: TextFormField(
+                    controller: asalhp,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.location_on),
+                      hintText: 'Alamat',
+                      labelText: 'Alamat Petani',
+                    ),
+                    validator: (u) => u == "" ? "Wajib Diisi " : null,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10, left: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -189,7 +196,7 @@ class _InputPonselState extends State<InputPonsel> {
                               : _imageURL != ''
                                   ? GestureDetector(
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(8),
                                         child: Image.network(
                                           _imageURL,
                                           fit: BoxFit.fitWidth,
@@ -210,20 +217,19 @@ class _InputPonselState extends State<InputPonsel> {
                                       },
                                       child: Container(
                                         height: 100,
-                                        child: (Row(
+                                        child: Row(
                                           children: <Widget>[
                                             Padding(
                                               padding:
-                                                  EdgeInsets.only(left: 24),
+                                                  EdgeInsets.only(left: 25),
                                             ),
                                             Text("Ambil Gambar")
                                           ],
-                                        )),
+                                        ),
                                         decoration: BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                    color:
-                                                        Colors.green.shade600,
+                                                    color: Colors.greenAccent,
                                                     width: 1))),
                                       ),
                                     ))
@@ -237,7 +243,7 @@ class _InputPonselState extends State<InputPonsel> {
                   child: RaisedButton(
                     color: Colors.green,
                     child: Text(
-                      'Simpan',
+                      'SIMPAN',
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
@@ -246,7 +252,7 @@ class _InputPonselState extends State<InputPonsel> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -257,7 +263,7 @@ class _InputPonselState extends State<InputPonsel> {
 
   Future getImage(ImageSource media) async {
     var img = await _picker.pickImage(source: media);
-
+    //final pickedImageFile = File(img!.path);
     setState(() {
       _imagePath = img!.path;
       print(_imagePath);

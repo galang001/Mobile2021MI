@@ -19,6 +19,7 @@ class PageLogin extends StatelessWidget {
       var params = {
         'email': data.name,
         'password': data.password,
+        'device_name': 'mobile'
       };
       res = await ApiStatic.sigIn(params);
       if (res.success != true) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_coba1/Model/ponsel.dart';
+import 'package:flutter_coba1/Service/apiStatic.dart';
 
 class detailponsel extends StatefulWidget {
   detailponsel({required this.ponsel});
@@ -20,7 +21,8 @@ class _detailponselState extends State<detailponsel> {
         width: double.infinity,
         child: ListView(
           children: [
-            Image.network(widget.ponsel.foto),
+            Image.network(
+                "http://192.168.1.4/API2021/public/" + widget.ponsel.foto),
             Container(
               padding: EdgeInsets.all(5),
               decoration: new BoxDecoration(

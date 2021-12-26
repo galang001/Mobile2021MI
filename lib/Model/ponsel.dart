@@ -24,22 +24,30 @@ class Ponsel {
   });
 
   factory Ponsel.fromJson(Map<String, dynamic> json) => Ponsel(
-        id_phone: json["id_phone"],
-        nama: json["nama"].toString(),
-        kd_phone: json["kd_phone"].toString(),
-        merk: json["merk"],
-        tahun: json["tahun"],
-        asalhp: json["asalhp"].toString(),
+        id_phone: json["id_phone"] as int,
+        nama: (json["nama"] == null || json["nama"] == '')
+            ? ''
+            : json["nama"].toString(),
+        kd_phone: (json["kd_phone"] == null || json["kd_phone"] == '')
+            ? ''
+            : json["kd_phone"].toString(),
+        merk: json["merk"] as int,
+        tahun: (json["tahun"] == null || json["tahun"] == '')
+            ? ''
+            : json["tahun"].toString(),
+        asalhp: (json["asalhp"] == null || json["asalhp"] == '')
+            ? ''
+            : json["asalhp"].toString(),
         foto: json["foto"].toString(),
         createdAt: json["created_at"].toString(),
         updatedAt: json["update_at"].toString(),
       );
-  Map<String, dynamic> toJson() => {
-        'nama': nama,
-        'kd_phone': kd_phone,
-        'merk': merk,
-        'tahun': tahun,
-        'asalhp': asalhp,
-        'foto': foto,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       'nama': nama,
+  //       'kd_phone': kd_phone,
+  //       'merk': merk,
+  //       'tahun': tahun,
+  //       'asalhp': asalhp,
+  //       'foto': foto,
+  //     };
 }

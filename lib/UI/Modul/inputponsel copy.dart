@@ -29,7 +29,7 @@ class _InputPonselState extends State<InputPonsel> {
   bool _validate = false;
 
   void getBrand() async {
-    final response = await ApiStatic.getBrandHP();
+    final response = await ApiStatic.getBrand();
     setState(() {
       _brand = response.toList();
     });
